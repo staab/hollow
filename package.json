@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "parse": "canopy hollow.peg --parse",
-    "build-ast": "node build-ast.js",
-    "compile": "yarn parse && yarn build-ast"
+    "build-sample": "node src/parse.js",
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "canopy": "^0.3.0"
+    "pegjs": "^0.10.0",
+    "ramda": "^0.25.0"
   }
 }

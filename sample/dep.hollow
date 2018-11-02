@@ -2,7 +2,7 @@
   (:accept [text]))
 
 (defn hello [endmark]
-  (def result (join text, endmark))
+  (def result (concat text endmark))
   (fn [] (console.log result)))
 
-
+{:hello hello}
