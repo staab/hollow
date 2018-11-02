@@ -1,0 +1,8 @@
+(ns sample.dep
+  (:accept [text]))
+
+(defn hello [endmark]
+  (def result (join text, endmark))
+  (fn [] (console.log result)))
+
+

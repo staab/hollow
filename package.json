@@ -1,0 +1,16 @@
+{
+  "name": "hollow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "parse": "canopy hollow.peg --parse",
+    "build-ast": "node build-ast.js",
+    "compile": "yarn parse && yarn build-ast"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canopy": "^0.3.0"
+  }
+}

@@ -1,0 +1,7 @@
+(ns sample.main)
+
+(def dep (require 'sample.dep "hello"))
+
+(def say-hello (dep.hello "!"))
+
+(say-hello)
