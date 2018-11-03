@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-sample": "node src/parse.js",
+    "build-sample": "node src/parse.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "args": "^5.0.0",
     "pegjs": "^0.10.0",
     "ramda": "^0.25.0"
   }
