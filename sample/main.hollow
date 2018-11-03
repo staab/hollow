@@ -3,6 +3,12 @@
 (def dep (require "sample.dep" "hello"))
 
 (def say_hello (dep.hello "!"))
+(def say_meh (dep.hello "."))
 
-(say_hello)
+(def say (multi (fn [i] (gt i 0))))
 
+(say.add_method true say_hello)
+(say.add_method false say_meh)
+
+(for [x (range 0 2)]
+  (say x))

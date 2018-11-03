@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-sample": "node src/parse.js"
+    "build-sample": "node src/main.js --target sample.main > sample/main.js",
+    "run-sample": "node -e \"$(node src/main.js --target sample.main)\""
   },
   "author": "",
   "license": "ISC",

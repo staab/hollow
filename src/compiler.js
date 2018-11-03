@@ -53,12 +53,31 @@ const compile = ({target, path}) => {
       const lastNonSpace = findLastIndex(({type}) => type !== 'space', body)
       const rest = body.slice(0, lastNonSpace)
       const last = body[lastNonSpace]
-      const bodyText = `${writeNodes(rest)} return ${writeNode(last)}`
+      const bodyText = `${writeNodes(rest, ';')} return ${writeNode(last)}`
 
-      return `function ${name.value} (${joinArgs(args)}) {${bodyText}};`
+      return `function ${name.value} (${joinArgs(args)}) { ${bodyText} }`
     },
-    def: ({name, body}) => `const ${name.value} = ${writeNode(body)};`,
-    fn: ({args, body}) => `(${joinArgs(args)}) => { return ${writeNodes(body)} }`,
+    def: ({name, body}) => `const ${name.value} = ${writeNode(body, ';')}`,
+    fn: ({args, body}) => {
+      const lastNonSpace = findLastIndex(({type}) => type !== 'space', body)
+      const rest = body.slice(0, lastNonSpace)
+      const last = body[lastNonSpace]
+      const bodyText = `${writeNodes(rest, ';')} return ${writeNode(last)}`
+
+      return `(${joinArgs(args)}) => { ${bodyText} }`
+    },
+    _if: ({cond, succeed, fail}) => {
+      const condText = `if (${writeNode(cond)})`
+      const succeedText = `{ return ${writeNode(succeed)} }`
+      const failText = fail ? `else { return ${writeNode(fail)} }` : ''
+
+      return `(function() { ${condText} ${succeedText} ${failText} }())`
+    },
+    _for: ({name, expr, body}) => {
+      const bodyText = writeNodes(body, ';')
+
+      return `(${writeNode(expr)}).map(${writeNode(name)} => { return ${bodyText} })`
+    },
     funcall: ({fn, args}) => {
       const wrapped = fn.type === 'symbol' ? fn.value : `(${writeNode(fn)})`
 
@@ -73,6 +92,7 @@ const compile = ({target, path}) => {
     },
     array: identity,
     float: identity,
+    integer: identity,
     space: identity,
     symbol: identity,
   }
@@ -89,13 +109,23 @@ const compile = ({target, path}) => {
     return writer(node.value)
   }
 
-  const writeNodes = (nodes) => {
-    return nodes.map(node => writeNode(node)).join("")
+  const writeNodes = (nodes, delimiter = null) => {
+    const result = nodes.map(node => {
+      let text = writeNode(node)
+
+      if (node.type !== 'space' && delimiter) {
+        text += delimiter
+      }
+
+      return text
+    })
+
+    return result.join("")
   }
 
-  const write = (ast) => {
-    const output = writeNodes(ast)
-    const stdlib = ['ramda']
+  const write = ast => {
+    const output = writeNodes(ast, ';')
+    const stdlib = ['ramda', './src/stdlib']
 
     return stdlib
       .map(name => `Object.assign(global, require('${name}'))\n`)

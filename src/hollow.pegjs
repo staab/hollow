@@ -8,8 +8,8 @@ start =
   (expr / space)*
 
 expr =
-  ns / require / defn / def / fn / funcall
-  / object / array / symbol / string / keyword / float / space
+  ns / require / defn / def / fn / if / for / funcall
+  / object / array / symbol / string / keyword / float / integer / space
 
 ns =
   "(ns" space name: symbol
@@ -48,6 +48,20 @@ fn =
     return node('fn', {args: args, body: body})
   }
 
+if =
+  "(if" space cond: expr space succeed: expr space fail: expr? ")"
+  {
+    return node('_if', {cond: cond, succeed: succeed, fail: fail})
+  }
+
+for =
+  "(for"
+    space "[" name: symbol space expr: expr "]"
+    space body: (space / expr)* ")"
+  {
+    return node('_for', {name: name, expr: expr, body: body})
+  }
+
 funcall =
   "(" fn: expr args: (expr / space)* ")" {
     return node('funcall', {fn: fn, args: args})
@@ -81,6 +95,11 @@ string =
 float =
   v: [0-9]+ "." [0-9]+ {
     return node('float', parseFloat(v.join("")))
+  }
+
+integer =
+  v: [0-9]+ {
+    return node('integer', parseInt(v.join(""), 10))
   }
 
 space =
