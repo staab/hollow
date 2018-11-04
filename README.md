@@ -31,9 +31,11 @@ Why another language?
 
 I had this problem: I wanted to write some (mostly) stateless business logic and include it both in my SPA (for speed and responsiveness), and in my python webserver (to ensure validation logic couldn't be circumvented). This use case evolved as I realized that this approach could be convenient too: why maintain two domain models, when I could maintain one and use it in both places?
 
-I originally started on this goal by writing a javascript library I could use in both places. This worked, but... it was still javascript. I wanted something better, so I started looking:
+I'm also a solo developer, which means my primary challenge isn't the complexity of the system I'm building, it's distilling the complexity into as compact a codebase and as concise abstractions as possible, so that I can maintain more of it. I don't have time to fight with my tools, or use every neat tool out there. I don't need advanced features for concurrency, performance, and scalability, because those aren't my problems (yet).
 
-### ClojureScript 
+I originally started on this goal by writing a javascript library. That worked, but... it was still javascript. I wanted something better, so I started looking:
+
+### ClojureScript
 
 Clojurescript was my first choice. I've loved Clojure since I listened to my first Rich Hickey talk almost four years ago. It seemed like an ideal solution: write once, compile to javascript, run everywhere! But there were some problems:
 
@@ -103,3 +105,7 @@ I don't expect Hollow to really gain any kind of traction like the languages I m
 [ ] Macros
 [ ] Argument destructuring
 [ ] Repl
+
+# Halp
+
+As mentioned above, I'm a solo developer. I made this tool because it was the quickest, cheapest way for me to get my work done. So if you like it, click on "issues" and lend a hand.
