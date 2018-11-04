@@ -90,21 +90,21 @@ I don't expect Hollow to really gain any kind of traction like the languages I m
 
 # Roadmap
 
-[x] Namespaces: parameterized to handle runtime as well as static dependencies, so more like functions that map to files.
-[x] Functions with closures (js style)
-[ ] Rename variables to avoid modules shadowing calling modules
-[ ] Basic immutable data types: string, integer, float, list, dict
-[ ] Standard library: use protocols, ala clojure, but ramda-style auto-currying
-[ ] Interop via api: expose a json api as another process that can be talked to over a socket. Use success/failure response modes, ala stderr/stdout, with extra granular codes
-[x] Fast compiler — probably use rust
-[ ] Collection-first
-[ ] Async-first: last parameter treated as callback? All functions return promises that can be then'd or awaited?
-[x] Good compilation errors, with line numbers
-[ ] Good runtime errors
-[ ] Loops, conditionals
-[ ] Macros
-[ ] Argument destructuring
-[ ] Repl
+- [x] Namespaces: parameterized to handle runtime as well as static dependencies, so more like functions that map to files.
+- [x] Functions with closures (js style)
+- [ ] Rename variables to avoid modules shadowing calling modules
+- [ ] Basic immutable data types: string, integer, float, list, dict
+- [ ] Standard library: use protocols, ala clojure, but ramda-style auto-currying
+- [ ] Interop via api: expose a json api as another process that can be talked to over a socket. Use success/failure response modes, ala stderr/stdout, with extra granular codes
+- [x] Fast compiler — probably use rust
+- [ ] Collection-first
+- [ ] Async-first: last parameter treated as callback? All functions return promises that can be then'd or awaited?
+- [ ] Good compilation errors, with line numbers
+- [ ] Good runtime errors
+- [ ] Loops, conditionals
+- [ ] Macros
+- [ ] Argument destructuring
+- [ ] Repl
 
 # Halp
 
